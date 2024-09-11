@@ -5,3 +5,50 @@
 <app-post [fromParent]="parentTitle" (messageEvent)="reciveMessage($event)"></app-post>
 
 <p>{{fromChildOutput}}</p>
+
+<!-- string Interpolation -->
+<p>{{message}}</p>
+
+<!-- property binding -->
+<!-- <img src="{{imgUrl}}" alt=""> -->
+<img [src]="imgUrl" alt="">
+
+<!-- class binding -->
+<p [class.text-red]="bool">class binding</p>
+
+<!-- style binding -->
+<h1 [style.color]="bool ? 'red' : 'blue'">style binding</h1>
+
+<!-- event binding -->
+<button (click)="buttonClick()">Event binding</button>
+<br>
+<!-- event filtering -->
+<!-- <input type="text" (keyup)="onKeyUp($event)"> -->
+<input type="text" (keyup.enter)="onKeyUp()">
+<br>
+<!-- template reference variable -->
+<input type="text" (keyup)="onKeyPress(myInput.value)" #myInput>
+<br>
+<!-- two way binding -->
+<input type="text" [(ngModel)]="userName" (keyup.enter)="onKeyEnter()">
+
+<div class="form-area">
+    <h1>Post Form</h1>
+    <br>
+    <input type="text" placeholder="Post Title" [(ngModel)]="postTitle"
+        [style.background]="isBackground ? 'red' : 'blue'" [style.color]="">
+    <br>
+    <textarea cols="30" rows="10" placeholder="Post Content" [(ngModel)]="postContent"></textarea>
+    <br>
+    <input type="text" placeholder="Post Image" [(ngModel)]="imgPostUrl">
+    <br>
+    <input type="text" placeholder="Post Url" [(ngModel)]="postUrl">
+    <br>
+    <input type="checkbox" [(ngModel)]="isBackground"> add backgroud
+
+
+    <div>{{postTitle}}</div>
+    <div>{{postContent}}</div>
+    <img [src]="imgPostUrl" alt="">
+    <a [href]="postUrl" [style.display]="postUrl ? 'block' : 'none'">More</a>
+</div>

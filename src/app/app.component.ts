@@ -28,4 +28,37 @@ export class AppComponent implements AfterViewInit {
 
     this.fromChildOutput = $event;
   }
+
+
+  note: string = 'Message from typeScript component file';
+  imgUrl: string = 'https://picsum.photos/200/300';
+  bool: boolean = true;
+  userName: string = '';
+  buttonClick() {
+    console.log('Click');
+  }
+
+  // onKeyUp($event: any) {
+  //   if ($event.keyCode === 13) {
+  //     console.log($event);
+  //   }
+  // }
+  onKeyUp() {
+    console.log('Enter');
+  }
+
+  onKeyPress(value: string) {
+    console.log(value);
+  }
+
+  onKeyEnter() {
+    console.log(this.userName);
+  }
+
+  postTitle: string = '';
+  postContent: string = '';
+  imgPostUrl: string = '';
+  postUrl: string = '';
+  isBackground: boolean = false;
+
 }
