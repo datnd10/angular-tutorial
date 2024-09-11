@@ -1,0 +1,7 @@
+<h1>ANgular</h1>
+<p>{{message}}</p>
+<app-navbar></app-navbar>
+
+<app-post [fromParent]="parentTitle" (messageEvent)="reciveMessage($event)"></app-post>
+
+<p>{{fromChildOutput}}</p>
