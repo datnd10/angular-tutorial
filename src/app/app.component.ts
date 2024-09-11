@@ -6,6 +6,7 @@ import { PostComponent } from './post/post.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent implements AfterViewInit {
   title = 'first-angular-app';
   parentTitle: string = 'parent title';
@@ -29,7 +30,7 @@ export class AppComponent implements AfterViewInit {
     this.fromChildOutput = $event;
   }
 
-
+  // Binding
   note: string = 'Message from typeScript component file';
   imgUrl: string = 'https://picsum.photos/200/300';
   bool: boolean = true;
@@ -61,4 +62,39 @@ export class AppComponent implements AfterViewInit {
   postUrl: string = '';
   isBackground: boolean = false;
 
+
+  // directives
+  postArray: Array<string> = ['post1', 'post2', 'post3'];
+
+  objArray: Array<any> = [{
+    id: 1,
+    name: 'John'
+  },
+  {
+    id: 2,
+    name: 'Jane'
+  },
+  {
+    id: 3,
+    name: 'Jack'
+  }
+  ]
+  addNew() {
+    this.objArray.push({
+      id: 4,
+      name: 'Jill'
+    })
+  }
+
+  delete(index: number) {
+    this.objArray.splice(index, 1);
+  }
+
+  stepForm: string = '';
+
+  onClick(value: string) {
+    this.stepForm = value;
+  }
+
+  isActive: boolean = true;
 }

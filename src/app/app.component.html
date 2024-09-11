@@ -52,3 +52,65 @@
     <img [src]="imgPostUrl" alt="">
     <a [href]="postUrl" [style.display]="postUrl ? 'block' : 'none'">More</a>
 </div>
+
+
+<!-- directive -->
+<ul>
+    <li *ngFor="let post of postArray"> {{post}}</li>
+</ul>
+
+<button (click)="addNew()">Add new Datta</button>
+
+<!-- 
+<div *ngIf="objArray.length > 0">
+    <ul>
+        <li *ngFor="let post of objArray; let i = index">
+            {{i}} {{post.id}} - {{post.name}}
+            <button (click)="delete(i)">Delete</button>
+        </li>
+    </ul>
+</div>
+
+<div *ngIf="objArray.length == 0">
+    <p>
+        No Data
+    </p>
+</div> -->
+
+<!-- ngtemplate -->
+<div *ngIf="objArray.length > 0; else noData">
+    <ul>
+        <li *ngFor="let post of objArray; let i = index">
+            {{i}} {{post.id}} - {{post.name}}
+            <button (click)="delete(i)">Delete</button>
+        </li>
+    </ul>
+</div>
+
+<!-- Sử dụng ng-template cho trường hợp không có dữ liệu -->
+<ng-template #noData>
+    <p>No Data</p>
+</ng-template>
+
+
+<!-- NgSwitchCase  -->
+<div>
+    <button (click)="onClick('Step 1')">Step 1</button>
+    <button (click)="onClick('Step 2')">Step 2</button>
+    <button (click)="onClick('Step 3')">Step 3</button>
+</div>
+
+<div [ngSwitch]="stepForm">
+    <p *ngSwitchCase="'Step 1'">Step 1</p>
+    <p *ngSwitchCase="'Step 2'">Step 2</p>
+    <p *ngSwitchCase="'Step 3'">Step 3</p>
+    <p *ngSwitchDefault>Default</p>
+</div>
+
+<!-- NgStyle -->
+
+<h1 [ngStyle]="{'color': isActive   ? 'blue' : 'red'}">NgStyle Directive</h1>
+
+
+<!-- NgClass -->
+<h1 [ngClass]="{'main': isActive, 'text-red': isActive} ">NgClass Directive</h1>
