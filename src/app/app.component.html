@@ -114,3 +114,26 @@
 
 <!-- NgClass -->
 <h1 [ngClass]="{'main': isActive, 'text-red': isActive} ">NgClass Directive</h1>
+
+
+<!-- pipe -->
+<h1>{{topic | uppercase}}</h1>
+
+<h1>{{count | number}}</h1>
+
+<h1>{{decimalCount | number:'1.1-2'}}</h1>
+
+<h1>{{currency | currency:'USD'}}</h1>
+
+<h1>{{today | date: 'shortDate'}}</h1>
+
+<h1>{{postObj | json}}</h1>
+
+<h1>{{0.25 | percent}}</h1>
+
+<h3>{{writeArray | slice:1:5}}</h3>
+
+<!-- custom pipe -->
+<h3>{{userDetails.name | appendCLI}}</h3>
+
+<p>{{dummyText | summary : 20}}</p>

@@ -97,4 +97,24 @@ export class AppComponent implements AfterViewInit {
   }
 
   isActive: boolean = true;
+
+
+  topic: string = 'Angular Programming';
+  count: number = 2822312;
+  decimalCount: number = 2.2222;
+  currency: number = 99.99;
+  today: Date = new Date();
+  postObj: object = {
+    id: 1,
+    post: 'Post 1'
+  }
+  writeArray = [
+    'Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'
+  ]
+  userDetails = {
+    name: 'John',
+    age: 25
+  }
+
+  dummyText: string = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, officia?';
 }
