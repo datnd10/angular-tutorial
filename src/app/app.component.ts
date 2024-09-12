@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { PostComponent } from './post/post.component';
-import { FormControl, NgForm } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { noSpaceValidator } from './validators/nospace.validators';
 
 @Component({
   selector: 'app-root',
@@ -16,8 +17,42 @@ export class AppComponent implements AfterViewInit {
 
   @ViewChild(PostComponent) postChild: any;
 
-  constructor() {
+  form: any;
+  formValidation: any;
+  emailRegex: string = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
+  contactRegex: string = '^[0-9]{10}$';
+  constructor(fb: FormBuilder) {
+    // this.form = fb.group({
+    //   fullname: ['', [Validators.required, Validators.minLength(5)]],
+    //   email: ['', [Validators.required, Validators.email]],
+    //   contactDetails: fb.group({
+    //     address: ['', Validators.required],
+    //     shippingAddress: ['', Validators.required],
+    //     contactNo: ['', [Validators.required, Validators.pattern(this.contactRegex)]]
+    //   }),
 
+    //   skills: fb.array([])
+    // })
+
+    this.formValidation = fb.group({
+      username: ['', [Validators.required, Validators.minLength(5), noSpaceValidator.noSpaceValidations]],
+      password: ['', [Validators.required, Validators.minLength(5)]]
+    })
+
+
+    this.form = new FormGroup({
+      fullName: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      email: new FormControl('', [Validators.required,
+      // Validators.pattern(this.emailRegex),
+      Validators.email]),
+      contactDetails: new FormGroup({
+        address: new FormControl('', Validators.required),
+        shippingAddress: new FormControl('', Validators.required),
+        contactNo: new FormControl('', [Validators.required, Validators.pattern(this.contactRegex)])
+      }),
+
+      skills: new FormArray([])
+    });
   }
   ngAfterViewInit(): void {
     console.log(this.postChild);
@@ -125,5 +160,50 @@ export class AppComponent implements AfterViewInit {
 
   getValue(f: any) {
     console.log(f);
+  }
+
+  get FullName() {
+    return this.form.get('fullName');
+  }
+
+  get Email() {
+    return this.form.get('email');
+  }
+
+  get Address() {
+    return this.form.get('contactDetails.address');
+  }
+
+  get ShippingAddress() {
+    return this.form.get('contactDetails.shippingAddress');
+  }
+
+  get ContactNo() {
+    return this.form.get('contactDetails.contactNo');
+  }
+
+
+  get Skills() {
+    return this.form.get('skills');
+  }
+
+  addSkills(skill: HTMLInputElement) {
+
+    (<FormArray>this.form.get('skills')).push(new FormControl(skill.value));
+    skill.value = '';
+    console.log(this.form.value);
+
+  }
+
+  removeSkills(index: number) {
+    (<FormArray>this.form.get('skills')).removeAt(index);
+  }
+
+  get fc() {
+    return this.formValidation.controls;
+  }
+
+  onSubmitReactiveForm() {
+    console.log(this.form.value);
   }
 }

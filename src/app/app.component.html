@@ -145,6 +145,7 @@
 
 <div class="container mt-5">
     <div class="form-area">
+        <h1>Template Driven Form</h1>
         <form #f="ngForm" (ngSubmit)="onSubmit(f)">
             <div class="form-group">
                 <label for="">FullName</label>
@@ -188,6 +189,92 @@
             </div>
 
             <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Submit</button>
+        </form>
+    </div>
+
+    <div class="form-area">
+        <h1>Reactive form</h1>
+        <form [formGroup]="form" (ngSubmit)="onSubmitReactiveForm()">
+            <div class="form-group">
+                <label for="">FullName</label>
+                <input type="text" placeholder="Full name" class="form-control" name="fullName"
+                    formControlName="fullName">
+                <div class="alert alert-danger" *ngIf="FullName.touched && FullName.invalid">
+                    <div *ngIf="FullName.errors?.['required']">Full name is required</div>
+                    <div *ngIf="FullName.errors?.['minlength']">Full name must be at least 5 characters</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Email</label>
+                <input type="email" placeholder="Email" class="form-control" name="email" formControlName="email">
+                <div class="alert alert-danger" *ngIf="Email.touched && Email.invalid">
+                    <div *ngIf="Email.errors?.['required']">email is required</div>
+                    <div *ngIf="Email.errors?.['email']">email must valid</div>
+                </div>
+            </div>
+
+
+            <div formGroupName="contactDetails">
+                <div class="form-group">
+                    <label for="">Address</label>
+                    <textarea cols="30" rows="10" placeholder="Message" class="form-control" name="address"
+                        formControlName="address"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="">Shipping Address</label>
+                    <textarea cols="30" rows="10" placeholder="Shipping Address" class="form-control" name="address"
+                        formControlName="shippingAddress"></textarea>
+                    <div class="alert alert-danger" *ngIf="ShippingAddress.touched && ShippingAddress.invalid">
+                        <div *ngIf="ShippingAddress.errors?.['required']">Shipping Address is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="">Contact No</label>
+                    <input type="text" placeholder="Contact No" class="form-control" name="contactNo"
+                        formControlName="contactNo">
+                    <div class="alert alert-danger" *ngIf="ContactNo.touched && ContactNo.invalid">
+                        <div *ngIf="ContactNo.errors?.['required']">Contact No is required</div>
+                        <div *ngIf="ContactNo.errors?.['pattern']">Contact No must be at valid</div>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="">Skills</label>
+                    <input type="text" class="form-control" #skill (keyup.enter)="addSkills(skill)">
+                    <ul class="list-group">
+                        <li class="list-group-item" *ngFor="let skill of Skills.value, let i = index">
+                            {{skill}}
+                            <a href="" class="btn btn-sm btn-danger" (click)="removeSkills(i)"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Submit</button>
+        </form>
+    </div>
+
+    <div class="form-area">
+        <form [formGroup]="formValidation">
+            <div class="form-group">
+                <label for="">Username</label>
+                <input type="text" name="name" class="form-control" formControlName="username">
+                <div class="alert alert-danger" *ngIf="fc['username'].touched && fc['username'].invalid">
+                    <div *ngIf="fc['username'].errors?.['required']">Username is required</div>
+                    <div *ngIf="fc['username'].errors?.['minlength']">Username must be at least 5 characters</div>
+                    <div *ngIf="fc['username'].errors?.['nospace']">Username must not contain space</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">password</label>
+                <input type="email" name="email" class="form-control" formControlName="password">
+                <div class="alert alert-danger" *ngIf="fc['password'].touched && fc['password'].invalid">
+                    <div *ngIf="fc['password'].errors?.['required']">email is required</div>
+                    <div *ngIf="fc['password'].errors?.['email']">email must valid</div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 </div>
