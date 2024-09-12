@@ -140,3 +140,54 @@
 
 
 <app-post-list></app-post-list>
+
+
+
+<div class="container mt-5">
+    <div class="form-area">
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+            <div class="form-group">
+                <label for="">FullName</label>
+                <input type="text" placeholder="Full name" class="form-control" name="fullName" ngModel
+                    #fullName="ngModel" (change)="getValue(fullName)" required
+                    [ngClass]="{'is-invalid': fullName.touched && fullName.invalid}" minlength="5" maxlength="10">
+                <div *ngIf="fullName.errors?.['required']">
+                    <div class="alert alert-danger" *ngIf="fullName.touched && fullName.invalid">Full name is required
+                    </div>
+                </div>
+                <div *ngIf="fullName.errors?.['minlength']">
+                    <div class="alert alert-danger" *ngIf="fullName.touched && fullName.invalid">Full name must be at
+                        least 5 characters
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Email</label>
+                <input type="email" placeholder="Email" class="form-control" name="email" ngModel #email="ngModel"
+                    pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required
+                    [ngClass]="{'is-invalid': email.touched &&   email.invalid}">
+                <div *ngIf="email.errors?.['required']">
+                    <div class="alert alert-danger" *ngIf="email.touched && email.invalid">Email is required
+                    </div>
+                </div>
+                <div *ngIf="email.errors?.['pattern']">
+                    <div class="alert alert-danger" *ngIf="email.touched && email.invalid">email must be at
+                        valid
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Address</label>
+                <textarea cols="30" rows="10" placeholder="Message" class="form-control" name="address" ngModel
+                    #address="ngModel" required
+                    [ngClass]="{'is-invalid': address.touched && address.invalid}"></textarea>
+                <div *ngIf="address.errors?.['required']">
+                    <div class="alert alert-danger" *ngIf="address.touched && address.invalid">Address is required
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Submit</button>
+        </form>
+    </div>
+</div>

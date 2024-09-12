@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { PostComponent } from './post/post.component';
+import { FormControl, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -117,4 +118,12 @@ export class AppComponent implements AfterViewInit {
   }
 
   dummyText: string = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, officia?';
+
+  onSubmit(f: NgForm) {
+    console.log(f.value);
+  }
+
+  getValue(f: any) {
+    console.log(f);
+  }
 }
